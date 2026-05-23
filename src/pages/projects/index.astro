@@ -9,9 +9,8 @@ const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime(
 ---
 
 <BaseLayout title="Projetos" description="Write-ups dos projetos que construí.">
-  <div class="max-w-2xl mx-auto px-4 py-12">
-    <h1 class="text-3xl font-serif font-bold text-[var(--color-text)] mb-2">Projetos</h1>
-    <p class="text-[var(--color-muted)] mb-10">Write-ups dos projetos que construí.</p>
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-serif font-bold text-[var(--color-text)] mb-10">Projetos</h1>
     {sorted.length === 0
       ? <p class="text-[var(--color-muted)]">Nenhum post ainda.</p>
       : sorted.map(post => (
@@ -23,6 +22,8 @@ const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime(
             type={post.data.type}
             tags={post.data.tags}
             readingTime={readingTime(post.body ?? '')}
+            cover={post.data.cover}
+            coverAlt={post.data.coverAlt}
           />
         ))
     }
