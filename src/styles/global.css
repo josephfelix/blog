@@ -7,6 +7,12 @@
 }
 
 @layer base {
+  .katex-display {
+    text-align: center;
+    overflow-x: auto;
+  }
+
+
   :root {
     --color-bg: #ffffff;
     --color-text: #1a1a1a;
