@@ -19,6 +19,10 @@
     overflow-x: auto;
   }
 
+  .prose p:has(.katex-display) {
+    text-align: center;
+  }
+
 
   :root {
     --color-bg: #ffffff;
