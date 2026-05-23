@@ -91,6 +91,19 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
           <slot />
         </Prose>
 
+        {tags.length > 0 && (
+          <div class="mt-8 flex flex-wrap gap-2">
+            {tags.map(tag => (
+              <a
+                href={`/blog/tags/${encodeURIComponent(tag)}/`}
+                class="text-sm text-[var(--color-muted)] hover:text-[var(--color-accent)] transition-colors"
+              >
+                #{tag}
+              </a>
+            ))}
+          </div>
+        )}
+
         <PostActions slug={slug} title={title} />
         <AuthorBio />
       </article>
