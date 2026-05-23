@@ -1,7 +1,6 @@
 ---
 import BaseLayout from './BaseLayout.astro'
 import Prose from '@/components/Prose.astro'
-import TagBadge from '@/components/TagBadge.astro'
 import Sidebar from '@/components/Sidebar.astro'
 import AuthorBio from '@/components/AuthorBio.astro'
 import PostActions from '@/components/PostActions.astro'
@@ -68,11 +67,6 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
             {description}
           </p>
 
-          {tags.length > 0 && (
-            <div class="flex flex-wrap gap-1">
-              {tags.map(tag => <TagBadge tag={tag} />)}
-            </div>
-          )}
         </header>
 
         {cover && coverAlt && (
