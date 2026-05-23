@@ -104,13 +104,13 @@ O Flux, desenvolvido por Black Forest Labs, usa arquitetura baseada em **transfo
 **Vídeo usando SDXL:**
 
 <video controls width="100%" style="border-radius: 8px; margin-bottom: 1rem;">
-  <source src="/blog/videos/luffy_sdxl.mp4" type="video/mp4" />
+  <source src="/blog/_content/por-que-e-absurdamente-dificil-gerar-um-filme-inteiro-usando-ia/luffy_sdxl.mp4" type="video/mp4" />
 </video>
 
 **Vídeo usando Flux:**
 
 <video controls width="100%" style="border-radius: 8px; margin-bottom: 1rem;">
-  <source src="/blog/videos/luffy_flux.mp4" type="video/mp4" />
+  <source src="/blog/_content/por-que-e-absurdamente-dificil-gerar-um-filme-inteiro-usando-ia/luffy_flux.mp4" type="video/mp4" />
 </video>
 
 ## Benchmark: SDXL vs Flux

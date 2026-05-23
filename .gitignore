@@ -21,3 +21,9 @@ pnpm-debug.log*
 
 # macOS
 .DS_Store
+
+# Windows alternate data streams
+*.Zone.Identifier
+
+# content assets copied to public at build time
+public/_content/
