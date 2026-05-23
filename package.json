@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@fontsource/lora": "^5.2.8",
+    "@fontsource/source-serif-4": "^5.2.9",
     "astro": "^6.3.7"
   },
   "devDependencies": {

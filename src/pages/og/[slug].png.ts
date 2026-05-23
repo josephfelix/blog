@@ -25,7 +25,7 @@ let fontData: Buffer | null = null
 function getFont(): Buffer {
   if (!fontData) {
     fontData = readFileSync(
-      resolve('./node_modules/@fontsource/lora/files/lora-latin-400-normal.woff')
+      resolve('./node_modules/@fontsource/source-serif-4/files/source-serif-4-latin-400-normal.woff')
     )
   }
   return fontData
@@ -68,7 +68,7 @@ export const GET: APIRoute = async ({ props }) => {
         justifyContent: 'space-between',
         padding: '64px',
         backgroundColor: '#ffffff',
-        fontFamily: 'Lora',
+        fontFamily: 'Source Serif 4',
       },
     },
     h(
@@ -110,7 +110,7 @@ export const GET: APIRoute = async ({ props }) => {
     height: 630,
     fonts: [
       {
-        name: 'Lora',
+        name: 'Source Serif 4',
         data: getFont(),
         weight: 400,
         style: 'normal',

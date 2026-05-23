@@ -2,6 +2,10 @@
 @plugin "@tailwindcss/typography";
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --font-serif: 'Source Serif 4', Georgia, serif;
+}
+
 @layer base {
   :root {
     --color-bg: #ffffff;
@@ -24,7 +28,7 @@
   html {
     background-color: var(--color-bg);
     color: var(--color-text);
-    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Source Serif 4', Georgia, serif;
     transition: background-color 0.2s, color 0.2s;
   }
 
