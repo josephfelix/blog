@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { title, description, slug, image } = Astro.props
-const siteUrl = 'https://josephfelix.github.io'
+const siteUrl = 'https://josephfelix.dev'
 const baseUrl = `${siteUrl}/blog`
 const canonicalUrl = slug ? `${baseUrl}/${slug}/` : `${baseUrl}/`
 const ogImage = image ?? (slug ? `${baseUrl}/og/${slug}.png` : `${baseUrl}/og/default.png`)

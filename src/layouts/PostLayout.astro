@@ -29,6 +29,7 @@ interface Props {
 }
 
 const { title, description, date, type, tags, slug, readingTime, cover, coverAlt, relatedPosts } = Astro.props
+const ogImage = cover ? `https://josephfelix.dev${cover}` : undefined
 
 const typeLabel: Record<string, string> = {
   project: 'Projeto',
@@ -44,7 +45,7 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
 })
 ---
 
-<BaseLayout {title} {description} {slug}>
+<BaseLayout {title} {description} {slug} image={ogImage}>
   <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="lg:grid lg:grid-cols-[1fr_280px] lg:gap-16">
       <article>
