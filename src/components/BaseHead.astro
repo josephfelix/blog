@@ -38,8 +38,7 @@ const fullTitle = title === 'Blog' ? 'Joseph Felix — Blog' : `${title} — Jos
 <script is:inline>
   ;(function () {
     const stored = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const isDark = stored ? stored === 'dark' : prefersDark
+    const isDark = stored === 'dark'
     document.documentElement.classList.toggle('dark', isDark)
   })()
 </script>
