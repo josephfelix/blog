@@ -19,7 +19,7 @@
     overflow-x: auto;
   }
 
-  .prose p:has(.katex-display) {
+  .prose p:has(.katex) {
     text-align: center;
   }
 
