@@ -6,6 +6,7 @@ tags: [rust, música, linguagem de programação, supercollider, open source, pr
 description: "O SuperCollider é poderoso, mas parece feito pra engenheiros de som. Eu queria escrever música como código, quase como uma partitura. Então criei a Sonara."
 cover: /blog/_content/por-que-criei-a-sonara/cover.png
 coverAlt: "Logo da linguagem Sonara"
+ogTitle: "Por que eu criei a Sonara, linguagem pra compor música"
 draft: false
 ---
 

@@ -6,6 +6,7 @@ tags: [inteligência artificial, geração de vídeo, ciência da computação, 
 description: "Quem afirma que IA vai substituir Hollywood em dois anos raramente calculou o custo computacional de gerar um único frame com qualidade cinematográfica."
 cover: /blog/_content/por-que-e-absurdamente-dificil-gerar-um-filme-inteiro-usando-ia/cover.png
 coverAlt: "Capa do artigo sobre geração de filmes com IA"
+ogTitle: "Por que é difícil gerar um filme inteiro usando IA"
 draft: false
 ---
 
