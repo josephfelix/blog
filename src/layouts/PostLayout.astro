@@ -30,7 +30,8 @@ interface Props {
 }
 
 const { title, description, date, type, tags, slug, readingTime, cover, coverAlt, ogTitle, relatedPosts } = Astro.props
-const ogImage = `https://josephfelix.dev/blog/og/${slug}.png`
+const siteBase = import.meta.env.PROD ? 'https://josephfelix.dev' : Astro.url.origin
+const ogImage = `${siteBase}/blog/og/${slug}.png`
 
 const typeLabel: Record<string, string> = {
   project: 'Projeto',

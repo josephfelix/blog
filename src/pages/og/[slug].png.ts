@@ -2,8 +2,9 @@ import type { APIRoute, GetStaticPaths } from 'astro'
 import { getCollection } from 'astro:content'
 import satori from 'satori'
 import { Resvg } from '@resvg/resvg-js'
-import { readFileSync } from 'fs'
+import { readFileSync, existsSync } from 'fs'
 import { resolve } from 'path'
+import sharp from 'sharp'
 
 function h(
   type: string,
@@ -31,6 +32,27 @@ function getFont(): Buffer {
   return fontData
 }
 
+function detectMime(buf: Buffer): string {
+  if (buf[0] === 0x89 && buf[1] === 0x50) return 'image/png'
+  if (buf[0] === 0xff && buf[1] === 0xd8) return 'image/jpeg'
+  if (buf.slice(0, 4).toString() === 'RIFF' && buf.slice(8, 12).toString() === 'WEBP') return 'image/webp'
+  return 'image/png'
+}
+
+async function getCoverDataUrl(cover: string | undefined): Promise<string | null> {
+  if (!cover) return null
+  const relativePath = cover.replace(/^\/blog/, '')
+  const filePath = resolve('./public' + relativePath)
+  if (!existsSync(filePath)) return null
+  let data = readFileSync(filePath)
+  let mime = detectMime(data)
+  if (mime === 'image/webp') {
+    data = await sharp(data).png().toBuffer()
+    mime = 'image/png'
+  }
+  return `data:${mime};base64,${data.toString('base64')}`
+}
+
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection('blog', p => !p.data.draft)
   return posts.map(post => ({
@@ -38,12 +60,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
     props: {
       title: post.data.ogTitle ?? post.data.title,
       type: post.data.type,
+      cover: post.data.cover,
     },
   }))
 }
 
 export const GET: APIRoute = async ({ props }) => {
-  const { title, type } = props as { title: string; type: string }
+  const { title, type, cover } = props as { title: string; type: string; cover?: string }
 
   const typeMap: Record<string, string> = {
     project: 'PROJETO',
@@ -52,7 +75,11 @@ export const GET: APIRoute = async ({ props }) => {
     security: 'SEGURANÇA',
   }
 
+  const coverDataUrl = await getCoverDataUrl(cover)
   const displayTitle = title.length > 60 ? title.slice(0, 57) + '…' : title
+  const hasCover = !!coverDataUrl
+
+  const titleFontSize = displayTitle.length > 50 ? 44 : displayTitle.length > 35 ? 52 : 62
 
   const element = h(
     'div',
@@ -61,72 +88,77 @@ export const GET: APIRoute = async ({ props }) => {
         width: '100%',
         height: '100%',
         display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        padding: '72px 80px',
-        backgroundColor: '#0f172a',
+        flexDirection: 'row',
         fontFamily: 'Source Serif 4',
+        backgroundColor: '#0f172a',
       },
     },
-    h(
-      'div',
-      { style: { display: 'flex', flexDirection: 'column', gap: '24px' } },
-      h(
-        'p',
-        {
-          style: {
-            fontSize: 14,
-            color: '#e94560',
-            fontWeight: 600,
-            margin: 0,
-            letterSpacing: '0.12em',
-          },
-        },
-        typeMap[type] ?? 'POST'
-      ),
-      h(
-        'h1',
-        {
-          style: {
-            fontSize: displayTitle.length > 45 ? 40 : 52,
-            fontWeight: 700,
-            color: '#f8fafc',
-            lineHeight: 1.2,
-            margin: 0,
-          },
-        },
-        displayTitle
-      )
-    ),
+    // left panel — cover image (contained, no crop)
+    ...(hasCover
+      ? [
+          h(
+            'div',
+            {
+              style: {
+                flex: '0 0 42%',
+                display: 'flex',
+                overflow: 'hidden',
+              },
+            },
+            h('img', {
+              src: coverDataUrl,
+              style: {
+                width: '100%',
+                height: '100%',
+                objectFit: 'fill',
+              },
+            })
+          ),
+        ]
+      : []),
+    // right panel — title + CTA centered
     h(
       'div',
       {
         style: {
           display: 'flex',
-          justifyContent: 'space-between',
+          flexDirection: 'column',
+          justifyContent: 'center',
           alignItems: 'center',
+          padding: '56px 56px',
+          flex: '1',
+          backgroundColor: '#0f172a',
+          gap: '40px',
         },
       },
       h(
-        'p',
-        { style: { fontSize: 18, color: '#94a3b8', margin: 0 } },
-        'josephfelix.dev/blog'
+        'h1',
+        {
+          style: {
+            fontSize: titleFontSize,
+            fontWeight: 700,
+            color: '#f8fafc',
+            lineHeight: 1.2,
+            margin: 0,
+            fontFamily: 'Source Serif 4',
+            textAlign: 'center',
+          },
+        },
+        displayTitle
       ),
       h(
         'div',
         {
           style: {
             display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
             backgroundColor: '#e94560',
-            padding: '12px 24px',
-            borderRadius: '8px',
+            padding: '18px 48px',
+            borderRadius: '12px',
           },
         },
         h(
           'p',
-          { style: { fontSize: 16, color: '#ffffff', margin: 0, fontWeight: 600 } },
+          { style: { fontSize: 22, color: '#ffffff', margin: 0, fontWeight: 600 } },
           'Ler artigo >>'
         )
       )

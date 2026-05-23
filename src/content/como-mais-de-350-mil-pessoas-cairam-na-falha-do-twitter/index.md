@@ -4,7 +4,7 @@ date: 2018-06-13
 type: security
 tags: [segurança, xss, javascript, twitter, php]
 description: "Em 2010, com 16 anos, explorei uma falha de XSS no Twitter que me permitiu publicar tweets em mais de 350 mil contas sem saber nenhuma senha."
-cover: /blog/_content/como-mais-de-350-mil-pessoas-cairam-na-falha-do-twitter/cover.jpeg
+cover: /blog/_content/como-mais-de-350-mil-pessoas-cairam-na-falha-do-twitter/cover.png
 coverAlt: "Ilustração representando a falha de XSS no Twitter"
 draft: false
 ---
