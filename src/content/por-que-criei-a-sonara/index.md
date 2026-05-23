@@ -1,6 +1,6 @@
 ---
 title: "Por que eu criei a Sonara, uma linguagem de programação pra compor música"
-date: 2026-05-23
+date: 2026-05-09
 type: project
 tags: [rust, música, linguagem de programação, supercollider, open source, projeto]
 description: "O SuperCollider é poderoso, mas parece feito pra engenheiros de som. Eu queria escrever música como código, quase como uma partitura. Então criei a Sonara."
