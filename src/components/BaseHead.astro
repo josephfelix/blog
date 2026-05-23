@@ -13,7 +13,7 @@ const baseUrl = `${siteUrl}/blog`
 const canonicalUrl = slug ? `${baseUrl}/${slug}/` : `${baseUrl}/`
 const ogImage = image ?? (slug ? `${baseUrl}/og/${slug}.png` : `${baseUrl}/og/default.png`)
 const fullTitle = title === 'Blog' ? 'Joseph Felix — Blog' : `${title} — Joseph Felix`
-const ogFullTitle = ogTitle ? `${ogTitle} — Joseph Felix` : fullTitle
+const ogFullTitle = ogTitle ?? title
 ---
 
 <meta charset="utf-8" />
