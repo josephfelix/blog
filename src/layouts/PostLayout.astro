@@ -4,6 +4,7 @@ import Prose from '@/components/Prose.astro'
 import TagBadge from '@/components/TagBadge.astro'
 import Sidebar from '@/components/Sidebar.astro'
 import AuthorBio from '@/components/AuthorBio.astro'
+import PostActions from '@/components/PostActions.astro'
 
 interface SidebarPost {
   id: string
@@ -84,10 +85,13 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
           />
         )}
 
+        <PostActions slug={slug} title={title} />
+
         <Prose>
           <slot />
         </Prose>
 
+        <PostActions slug={slug} title={title} />
         <AuthorBio />
       </article>
 
