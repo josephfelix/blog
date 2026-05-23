@@ -1,0 +1,41 @@
+---
+interface SidebarPost {
+  id: string
+  data: {
+    title: string
+    date: Date
+    tags: string[]
+    type: string
+  }
+}
+
+interface Props {
+  posts: SidebarPost[]
+  currentSlug: string
+}
+
+const { posts, currentSlug } = Astro.props
+const others = posts.filter(p => p.id !== currentSlug).slice(0, 5)
+---
+
+{others.length > 0 && (
+  <aside aria-label="Outros artigos" class="space-y-6">
+    <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--color-muted)]">
+      Leia também
+    </h3>
+    <ul class="space-y-4" role="list">
+      {others.map(post => (
+        <li>
+          <a href={`/blog/${post.id}/`} class="group block">
+            <p class="text-sm font-medium text-[var(--color-text)] group-hover:text-[var(--color-accent)] transition-colors leading-snug">
+              {post.data.title}
+            </p>
+            <p class="text-xs text-[var(--color-muted)] mt-1">
+              {post.data.date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </p>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </aside>
+)}
