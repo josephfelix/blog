@@ -34,7 +34,11 @@ O custo computacional segue a fórmula:
 
 > Y = X · W
 
-Onde operações lineares custam O(n·d·m). Mecanismos de atenção são ainda mais pesados, com custo quadrático O(n²·d).
+Onde operações lineares custam O(n·d·m). O mecanismo de atenção — coração dos transformers modernos — é definido por:
+
+$$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^T}{\sqrt{d}}\right) V$$
+
+O custo quadrático O(n²·d) vem do produto $QK^T$, onde $n$ é o número de tokens (pixels/patches) e $d$ a dimensão do espaço latente.
 
 Para uma imagem com 30 steps:
 - Um forward pass: bilhões de operações
