@@ -98,6 +98,10 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
           </div>
         )}
 
+        <p class="mt-6 text-sm text-[var(--color-muted)]">
+          Publicado em: <time datetime={date.toISOString()}>{formattedDate}</time>
+        </p>
+
         <PostActions slug={slug} title={title} />
         <AuthorBio />
       </article>
