@@ -8,6 +8,13 @@
 
 @layer base {
   .katex-display {
+    display: block;
+    text-align: center;
+    overflow-x: auto;
+  }
+
+  .prose .katex-display {
+    display: block;
     text-align: center;
     overflow-x: auto;
   }
