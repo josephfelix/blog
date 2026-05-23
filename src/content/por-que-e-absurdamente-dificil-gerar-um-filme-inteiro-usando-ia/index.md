@@ -95,6 +95,20 @@ O Flux, desenvolvido por Black Forest Labs, usa arquitetura baseada em **transfo
 
 ---
 
+## Comparativo visual: SDXL vs Flux
+
+**Vídeo usando SDXL:**
+
+<video controls width="100%" style="border-radius: 8px; margin-bottom: 1rem;">
+  <source src="./luffy_sdxl.mp4" type="video/mp4" />
+</video>
+
+**Vídeo usando Flux:**
+
+<video controls width="100%" style="border-radius: 8px; margin-bottom: 1rem;">
+  <source src="./luffy_flux.mp4" type="video/mp4" />
+</video>
+
 ## Benchmark: SDXL vs Flux
 
 | Métrica | SDXL (4090) | SDXL (A100) | Flux.1 Dev (4090) | Flux.1 Dev (A100) |
