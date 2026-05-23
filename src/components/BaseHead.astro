@@ -35,6 +35,15 @@ const fullTitle = title === 'Blog' ? 'Joseph Felix — Blog' : `${title} — Jos
 
 <link rel="icon" type="image/svg+xml" href="/blog/favicon.svg" />
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2HD5DZ5W4J"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2HD5DZ5W4J');
+</script>
+
 <script is:inline>
   ;(function () {
     const stored = localStorage.getItem('theme')
