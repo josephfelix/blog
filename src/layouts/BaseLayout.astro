@@ -13,15 +13,16 @@ interface Props {
   description: string
   slug?: string
   image?: string
+  ogTitle?: string
 }
 
-const { title, description, slug, image } = Astro.props
+const { title, description, slug, image, ogTitle } = Astro.props
 ---
 
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <BaseHead {title} {description} {slug} {image} />
+    <BaseHead {title} {description} {slug} {image} {ogTitle} />
   </head>
   <body class="bg-[var(--color-bg)] text-[var(--color-text)]">
     <Nav />

@@ -4,14 +4,16 @@ interface Props {
   description: string
   slug?: string
   image?: string
+  ogTitle?: string
 }
 
-const { title, description, slug, image } = Astro.props
+const { title, description, slug, image, ogTitle } = Astro.props
 const siteUrl = 'https://josephfelix.dev'
 const baseUrl = `${siteUrl}/blog`
 const canonicalUrl = slug ? `${baseUrl}/${slug}/` : `${baseUrl}/`
 const ogImage = image ?? (slug ? `${baseUrl}/og/${slug}.png` : `${baseUrl}/og/default.png`)
 const fullTitle = title === 'Blog' ? 'Joseph Felix — Blog' : `${title} — Joseph Felix`
+const ogFullTitle = ogTitle ? `${ogTitle} — Joseph Felix` : fullTitle
 ---
 
 <meta charset="utf-8" />
@@ -24,12 +26,12 @@ const fullTitle = title === 'Blog' ? 'Joseph Felix — Blog' : `${title} — Jos
 
 <meta property="og:type" content="website" />
 <meta property="og:url" content={canonicalUrl} />
-<meta property="og:title" content={fullTitle} />
+<meta property="og:title" content={ogFullTitle} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImage} />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:title" content={ogFullTitle} />
 <meta name="twitter:description" content={description} />
 <meta name="twitter:image" content={ogImage} />
 

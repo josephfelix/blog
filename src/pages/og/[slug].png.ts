@@ -36,26 +36,23 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return posts.map(post => ({
     params: { slug: post.id },
     props: {
-      title: post.data.title,
-      description: post.data.description,
+      title: post.data.ogTitle ?? post.data.title,
       type: post.data.type,
     },
   }))
 }
 
 export const GET: APIRoute = async ({ props }) => {
-  const { title, description, type } = props as {
-    title: string
-    description: string
-    type: string
-  }
+  const { title, type } = props as { title: string; type: string }
 
   const typeMap: Record<string, string> = {
-    project: 'Projeto',
-    tutorial: 'Tutorial',
-    article: 'Artigo',
-    security: 'Segurança',
+    project: 'PROJETO',
+    tutorial: 'TUTORIAL',
+    article: 'ARTIGO',
+    security: 'SEGURANÇA',
   }
+
+  const displayTitle = title.length > 60 ? title.slice(0, 57) + '…' : title
 
   const element = h(
     'div',
@@ -66,42 +63,73 @@ export const GET: APIRoute = async ({ props }) => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '64px',
-        backgroundColor: '#ffffff',
+        padding: '72px 80px',
+        backgroundColor: '#0f172a',
         fontFamily: 'Source Serif 4',
       },
     },
     h(
       'div',
-      { style: { display: 'flex', flexDirection: 'column', gap: '16px' } },
+      { style: { display: 'flex', flexDirection: 'column', gap: '24px' } },
       h(
         'p',
-        { style: { fontSize: 14, color: '#1a8917', fontWeight: 600, margin: 0 } },
-        typeMap[type] ?? ''
+        {
+          style: {
+            fontSize: 14,
+            color: '#e94560',
+            fontWeight: 600,
+            margin: 0,
+            letterSpacing: '0.12em',
+          },
+        },
+        typeMap[type] ?? 'POST'
       ),
       h(
         'h1',
         {
           style: {
-            fontSize: title.length > 60 ? 36 : 48,
+            fontSize: displayTitle.length > 45 ? 40 : 52,
             fontWeight: 700,
-            color: '#1a1a1a',
+            color: '#f8fafc',
             lineHeight: 1.2,
             margin: 0,
           },
         },
-        title
-      ),
-      h(
-        'p',
-        { style: { fontSize: 20, color: '#6b7280', margin: 0, lineHeight: 1.5 } },
-        description.length > 120 ? description.slice(0, 117) + '…' : description
+        displayTitle
       )
     ),
     h(
-      'p',
-      { style: { fontSize: 16, color: '#9ca3af', margin: 0 } },
-      'josephfelix.github.io/blog'
+      'div',
+      {
+        style: {
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        },
+      },
+      h(
+        'p',
+        { style: { fontSize: 18, color: '#94a3b8', margin: 0 } },
+        'josephfelix.dev/blog'
+      ),
+      h(
+        'div',
+        {
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            backgroundColor: '#e94560',
+            padding: '12px 24px',
+            borderRadius: '8px',
+          },
+        },
+        h(
+          'p',
+          { style: { fontSize: 16, color: '#ffffff', margin: 0, fontWeight: 600 } },
+          'Ler artigo >>'
+        )
+      )
     )
   )
 

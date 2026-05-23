@@ -25,11 +25,12 @@ interface Props {
   readingTime: number
   cover?: string
   coverAlt?: string
+  ogTitle?: string
   relatedPosts: SidebarPost[]
 }
 
-const { title, description, date, type, tags, slug, readingTime, cover, coverAlt, relatedPosts } = Astro.props
-const ogImage = cover ? `https://josephfelix.dev${cover}` : undefined
+const { title, description, date, type, tags, slug, readingTime, cover, coverAlt, ogTitle, relatedPosts } = Astro.props
+const ogImage = `https://josephfelix.dev/blog/og/${slug}.png`
 
 const typeLabel: Record<string, string> = {
   project: 'Projeto',
@@ -45,7 +46,7 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
 })
 ---
 
-<BaseLayout {title} {description} {slug} image={ogImage}>
+<BaseLayout {title} {description} {slug} image={ogImage} {ogTitle}>
   <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="lg:grid lg:grid-cols-[1fr_280px] lg:gap-16">
       <article>

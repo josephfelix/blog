@@ -16,6 +16,7 @@ const blog = defineCollection({
       description: z.string(),
       cover: z.string().optional(),
       coverAlt: z.string().optional(),
+      ogTitle: z.string().optional(),
       draft: z.boolean().default(false),
     })
     .refine((data) => !data.cover || !!data.coverAlt, {

@@ -6,6 +6,7 @@ tags: [segurança, forense, whatsapp, inteligência artificial, fake news, metad
 description: "Descobri que imagens geradas por IA carregam uma assinatura criptográfica nos bytes. O WhatsApp apaga tudo isso antes de entregar a imagem pra você."
 cover: /blog/_content/whatsapp-fake-news-metadados-ia/cover.png
 coverAlt: "Capa do artigo sobre WhatsApp e fake news"
+ogTitle: "O WhatsApp apaga a assinatura que detecta fake news"
 draft: false
 ---
 
