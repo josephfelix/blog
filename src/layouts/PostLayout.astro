@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro'
 import Prose from '@/components/Prose.astro'
 import TagBadge from '@/components/TagBadge.astro'
 import Sidebar from '@/components/Sidebar.astro'
+import AuthorBio from '@/components/AuthorBio.astro'
 
 interface SidebarPost {
   id: string
@@ -86,6 +87,8 @@ const formattedDate = date.toLocaleDateString('pt-BR', {
         <Prose>
           <slot />
         </Prose>
+
+        <AuthorBio />
       </article>
 
       <div class="hidden lg:block">
