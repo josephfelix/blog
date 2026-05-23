@@ -42,31 +42,29 @@ const { slug, title } = Astro.props
   </button>
 </div>
 
-<script>
-  function trackEvent(name: string, props: Record<string, unknown>) {
-    if (typeof window === 'undefined') return
-    const w = window as any
-    if (typeof w.gtag === 'function') {
-      w.gtag('event', name, props)
-    } else if (typeof w.plausible === 'function') {
-      w.plausible(name, { props })
-    } else if (typeof w.analytics?.track === 'function') {
-      w.analytics.track(name, props)
+<script is:inline>
+  function trackEvent(name, props) {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, props)
+    } else if (typeof window.plausible === 'function') {
+      window.plausible(name, { props })
+    } else if (typeof window.analytics?.track === 'function') {
+      window.analytics.track(name, props)
     }
   }
 
-  document.querySelectorAll<HTMLElement>('.post-actions').forEach(container => {
-    const slug = container.dataset.slug!
-    const title = container.dataset.title!
+  document.querySelectorAll('.post-actions').forEach(container => {
+    const slug = container.dataset.slug
+    const title = container.dataset.title
     const url = window.location.href
 
     // --- Like ---
-    const likeBtn = container.querySelector<HTMLButtonElement>('.like-btn')!
-    const likeLabel = container.querySelector<HTMLElement>('.like-label')!
-    const likeIcon = container.querySelector<SVGElement>('.like-icon')!
+    const likeBtn = container.querySelector('.like-btn')
+    const likeLabel = container.querySelector('.like-label')
+    const likeIcon = container.querySelector('.like-icon')
     const likeKey = `liked_${slug}`
 
-    function applyLikeState(liked: boolean) {
+    function applyLikeState(liked) {
       likeBtn.setAttribute('aria-pressed', String(liked))
       if (liked) {
         likeIcon.setAttribute('fill', 'currentColor')
@@ -88,26 +86,26 @@ const { slug, title } = Astro.props
       localStorage.setItem(likeKey, nowLiked ? '1' : '0')
       applyLikeState(nowLiked)
       if (nowLiked) {
-        trackEvent('post_liked', { slug, title })
+        trackEvent('like_post', { post_slug: slug, post_title: title })
       }
     })
 
     // --- Copy link ---
-    const copyBtn = container.querySelector<HTMLButtonElement>('.copy-btn')!
-    const copyLabel = container.querySelector<HTMLElement>('.copy-label')!
+    const copyBtn = container.querySelector('.copy-btn')
+    const copyLabel = container.querySelector('.copy-label')
 
     copyBtn.addEventListener('click', async () => {
       await navigator.clipboard.writeText(url)
       copyLabel.textContent = 'Copiado!'
-      trackEvent('post_link_copied', { slug, title, url })
+      trackEvent('post_link_copied', { post_slug: slug, post_title: title, url })
       setTimeout(() => { copyLabel.textContent = 'Copiar link' }, 2000)
     })
 
     // --- Share ---
-    const shareBtn = container.querySelector<HTMLButtonElement>('.share-btn')!
+    const shareBtn = container.querySelector('.share-btn')
 
     shareBtn.addEventListener('click', async () => {
-      trackEvent('post_shared', { slug, title, url })
+      trackEvent('post_shared', { post_slug: slug, post_title: title, url })
       if (navigator.share) {
         await navigator.share({ title, url })
       } else {
