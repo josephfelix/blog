@@ -6,7 +6,7 @@ interface Props {
   date: Date
   description: string
   slug: string
-  type: 'project' | 'tutorial' | 'note' | 'essay'
+  type: 'project' | 'tutorial' | 'article' | 'security'
   tags: string[]
   readingTime: number
 }
@@ -16,8 +16,8 @@ const { title, date, description, slug, type, tags, readingTime } = Astro.props
 const typeLabel: Record<string, string> = {
   project: 'Projeto',
   tutorial: 'Tutorial',
-  note: 'Artigo',
-  essay: 'Segurança',
+  article: 'Artigo',
+  security: 'Segurança',
 }
 
 const formattedDate = date.toLocaleDateString('pt-BR', {

@@ -18,7 +18,7 @@ interface Props {
   title: string
   description: string
   date: Date
-  type: 'project' | 'tutorial' | 'note' | 'essay'
+  type: 'project' | 'tutorial' | 'article' | 'security'
   tags: string[]
   slug: string
   readingTime: number
@@ -32,8 +32,8 @@ const { title, description, date, type, tags, slug, readingTime, cover, coverAlt
 const typeLabel: Record<string, string> = {
   project: 'Projeto',
   tutorial: 'Tutorial',
-  note: 'Artigo',
-  essay: 'Segurança',
+  article: 'Artigo',
+  security: 'Segurança',
 }
 
 const formattedDate = date.toLocaleDateString('pt-BR', {

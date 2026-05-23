@@ -1,7 +1,7 @@
 ---
 title: "Hello, World — Apresentando o Blog"
 date: 2026-05-22
-type: note
+type: article
 tags: [meta, blog, astro]
 description: "Primeiro post do blog. Explico o que esperar por aqui: projetos, tutoriais, notas rápidas e ensaios sobre tecnologia."
 draft: false

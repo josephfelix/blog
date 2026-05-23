@@ -4,7 +4,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import PostCard from '@/components/PostCard.astro'
 import { readingTime } from '@/utils/readingTime'
 
-const posts = await getCollection('blog', p => !p.data.draft && p.data.type === 'essay')
+const posts = await getCollection('blog', p => !p.data.draft && p.data.type === 'security')
 const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
 ---
 

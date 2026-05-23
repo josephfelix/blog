@@ -11,7 +11,7 @@ const blog = defineCollection({
     .object({
       title: z.string(),
       date: z.coerce.date(),
-      type: z.enum(['project', 'tutorial', 'note', 'essay']),
+      type: z.enum(['project', 'tutorial', 'article', 'security']),
       tags: z.array(z.string()),
       description: z.string(),
       cover: z.string().optional(),

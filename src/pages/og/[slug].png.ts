@@ -53,8 +53,8 @@ export const GET: APIRoute = async ({ props }) => {
   const typeMap: Record<string, string> = {
     project: 'Projeto',
     tutorial: 'Tutorial',
-    note: 'Artigo',
-    essay: 'Segurança',
+    article: 'Artigo',
+    security: 'Segurança',
   }
 
   const element = h(
