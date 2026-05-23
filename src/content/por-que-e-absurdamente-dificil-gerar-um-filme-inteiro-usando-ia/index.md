@@ -111,12 +111,12 @@ O Flux, desenvolvido por Black Forest Labs, usa arquitetura baseada em **transfo
 
 ## Benchmark: SDXL vs Flux
 
-| Métrica | SDXL (4090) | SDXL (A100) | Flux.1 Dev (4090) | Flux.1 Dev (A100) |
-|---------|-------------|-------------|------------------|------------------|
-| Throughput | ~0,2 img/s | ~0,4 img/s | ~0,08 img/s | ~0,15 img/s |
-| Tempo/1024p | ~5s | ~2,5s | ~12,5s | ~6,7s |
-
-*Resolução 1024×1024, 30 steps, sampler DPM++ 2M Karras*
+| Métrica | SDXL (RTX 4090) | SDXL (A100 80GB) | Flux.1 Dev (RTX 4090) | Flux.1 Dev (A100 80GB) |
+|---------|----------------|-----------------|----------------------|----------------------|
+| Tempo por imagem | ~4–6s | ~2–3s | ~12–18s | ~5–8s |
+| VRAM usada | ~10–12GB | ~12GB | ~20–24GB | ~22–26GB |
+| Throughput | ~0,15–0,25 img/s | ~0,35–0,5 img/s | ~0,06–0,08 img/s | ~0,13–0,2 img/s |
+| Observações | Estável, sem gargalos | Excelente headroom | Lento em VRAM < 24GB | Gargalo CPU↔GPU offload |
 
 O A100 escala melhor pela banda de memória superior (2TB/s vs ~1TB/s da 4090) e capacidade de manter o modelo inteiro em VRAM.
 
