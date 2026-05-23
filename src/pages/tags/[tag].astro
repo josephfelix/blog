@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import PostCard from '@/components/PostCard.astro'
+import { readingTime } from '@/utils/readingTime'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', p => !p.data.draft)
+  const tags = [...new Set(posts.flatMap(p => p.data.tags))]
+  return tags.map(tag => ({
+    params: { tag },
+    props: { tag, posts: posts.filter(p => p.data.tags.includes(tag)) },
+  }))
+}
+
+const { tag, posts } = Astro.props
+const sorted = posts.sort((a: any, b: any) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<BaseLayout title={`#${tag}`} description={`Posts com a tag "${tag}".`}>
+  <div class="max-w-2xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-serif font-bold text-[var(--color-text)] mb-2">#{tag}</h1>
+    <p class="text-[var(--color-muted)] mb-10">{sorted.length} post{sorted.length !== 1 ? 's' : ''} com esta tag.</p>
+    {sorted.map((post: any) => (
+      <PostCard
+        title={post.data.title}
+        date={post.data.date}
+        description={post.data.description}
+        slug={post.id}
+        type={post.data.type}
+        tags={post.data.tags}
+        readingTime={readingTime(post.body ?? '')}
+      />
+    ))}
+  </div>
+</BaseLayout>

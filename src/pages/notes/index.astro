@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import PostCard from '@/components/PostCard.astro'
+import { readingTime } from '@/utils/readingTime'
+
+const posts = await getCollection('blog', p => !p.data.draft && p.data.type === 'note')
+const sorted = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+---
+
+<BaseLayout title="Notas" description="Aprendizados rápidos, snippets e observações.">
+  <div class="max-w-2xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-serif font-bold text-[var(--color-text)] mb-2">Notas</h1>
+    <p class="text-[var(--color-muted)] mb-10">Aprendizados rápidos, snippets e observações.</p>
+    {sorted.length === 0
+      ? <p class="text-[var(--color-muted)]">Nenhum post ainda.</p>
+      : sorted.map(post => (
+          <PostCard
+            title={post.data.title}
+            date={post.data.date}
+            description={post.data.description}
+            slug={post.id}
+            type={post.data.type}
+            tags={post.data.tags}
+            readingTime={readingTime(post.body ?? '')}
+          />
+        ))
+    }
+  </div>
+</BaseLayout>
