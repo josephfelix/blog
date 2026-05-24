@@ -99,7 +99,7 @@ O problema: tercinas.
 
 O primeiro movimento usa três notas por tempo, o tempo todo. Não é colcheia, não é semicolcheia. É um terço de tempo. E a Sonara, naquele ponto, não sabia o que era um terço de tempo.
 
-Eu tinha durações para inteira (`w`), meia (`h`), quarto (padrão) e oitavo (`e`). As durações que qualquer pessoa aprende em teoria musical básica. Colcheia de tercina não é uma duração "normal" — é uma subdivisão que existe pra resolver o conflito entre o binário da notação e o ternário do ritmo.
+Eu tinha durações para inteira (`w`), meia (`h`), quarto (padrão) e oitavo (`e`). As durações que qualquer pessoa aprende em teoria musical básica. Colcheia de tercina não é uma duração "normal", é uma subdivisão que existe pra resolver o conflito entre o binário da notação e o ternário do ritmo.
 
 Às quase uma da manhã, adicionei o `t`. Colcheia de tercina. Um terço de tempo. Refiz os 69 compassos do primeiro movimento, cada um com doze notas em tercinas:
 
