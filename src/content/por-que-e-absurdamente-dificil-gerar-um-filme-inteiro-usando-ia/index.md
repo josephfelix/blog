@@ -12,7 +12,7 @@ draft: false
 
 ## Por que estou escrevendo isso?
 
-Fui inspirado pela vontade de criar episódios de anime para o meu filho de 10 anos, que adora One Piece. Após pesquisar a viabilidade, descobri que gerar vídeos de qualidade cinematográfica é exponencialmente mais complexo do que parece — apesar de vídeos curtos serem abundantes nas redes sociais.
+Fui inspirado pela vontade de criar episódios de anime para o meu filho de 10 anos, que adora One Piece. Após pesquisar a viabilidade, descobri que gerar vídeos de qualidade cinematográfica é exponencialmente mais complexo do que parece, apesar de vídeos curtos serem abundantes nas redes sociais.
 
 ---
 
@@ -37,7 +37,7 @@ O custo computacional segue a fórmula:
 
 > Y = X · W
 
-Onde operações lineares custam O(n·d·m). O mecanismo de atenção — coração dos transformers modernos — é definido por:
+Onde operações lineares custam O(n·d·m). O mecanismo de atenção, coração dos transformers modernos, é definido por:
 
 $$\text{Attention}(Q, K, V) = \text{softmax}\!\left(\frac{QK^T}{\sqrt{d}}\right) V$$
 
@@ -85,7 +85,7 @@ Para contexto: NVIDIA RTX 4090 atinge ~82,6 TFLOPs em fp16 teoricamente.
 
 ## Flux: a nova geração 🚀
 
-O Flux, desenvolvido por Black Forest Labs, usa arquitetura baseada em **transformers** (Diffusion Transformer — DiT), em vez de UNet puro.
+O Flux, desenvolvido por Black Forest Labs, usa arquitetura baseada em **transformers** (Diffusion Transformer, DiT), em vez de UNet puro.
 
 ### Melhorias
 
@@ -151,12 +151,12 @@ Se cada frame custa ~5s em 4090 com SDXL:
 
 ### O problema real: consistência temporal
 
-Gerar 120 imagens independentes não é um vídeo — é um slideshow com personagens que mudam de rosto a cada corte, iluminação aleatória e mãos que desaparecem.
+Gerar 120 imagens independentes não é um vídeo, é um slideshow com personagens que mudam de rosto a cada corte, iluminação aleatória e mãos que desaparecem.
 
 Manter consistência visual requer:
 
-1. **Conditioning adicional** (image-to-image com frame anterior) — propaga erros progressivamente
-2. **Modelos de vídeo nativos** (Sora, Wan, CogVideoX) — adicionam dimensão temporal à atenção, multiplicando custo ainda mais
+1. **Conditioning adicional** (image-to-image com frame anterior): propaga erros progressivamente
+2. **Modelos de vídeo nativos** (Sora, Wan, CogVideoX): adicionam dimensão temporal à atenção, multiplicando custo ainda mais
 
 Para um clipe de 16 frames a 512p, o custo rivaliza com dezenas de imagens individuais.
 
@@ -178,9 +178,9 @@ A100 em cloud: $2,5–4/hora
 
 - 120 horas = **$300–480 só de frames brutos**
 
-Isso assumindo geração perfeita sem rejeições, sem iterações criativas, sem retakes. Na realidade, produção cinematográfica envolve centenas de takes e revisões — multiplicando o custo por 10×–100×.
+Isso assumindo geração perfeita sem rejeições, sem iterações criativas, sem retakes. Na realidade, produção cinematográfica envolve centenas de takes e revisões, multiplicando o custo por 10×–100×.
 
-**Problema não resolvido:** Não existe pipeline confiável para manter identidade de personagem, direção de câmera e continuidade narrativa ao longo de 172.800 frames. Não é questão de poder computacional — é problema de pesquisa em aberto.
+**Problema não resolvido:** Não existe pipeline confiável para manter identidade de personagem, direção de câmera e continuidade narrativa ao longo de 172.800 frames. Não é questão de poder computacional, é problema de pesquisa em aberto.
 
 ---
 

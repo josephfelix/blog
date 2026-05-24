@@ -81,7 +81,7 @@ Não se preocupe, depois desse tópico você irá entender o motivo dessa explic
 
 Mas como eu pego esse cookie usando essa falha?
 
-É simples, os cookies do navegador podem ser pegos usando `document.cookie`. Experimente entrar no console do seu navegador e digitar `document.cookie` — você irá visualizar todos os cookies do site que você está vendo atualmente, que salvou em seu navegador.
+É simples, os cookies do navegador podem ser pegos usando `document.cookie`. Experimente entrar no console do seu navegador e digitar `document.cookie`, você irá visualizar todos os cookies do site que você está vendo atualmente, que salvou em seu navegador.
 
 ![document.cookie no console do navegador](/blog/_content/como-mais-de-350-mil-pessoas-cairam-na-falha-do-twitter/document-cookie.png)
 
