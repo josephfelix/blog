@@ -1,5 +1,5 @@
 ---
-title: "Apenas 1 coisa que o WhatsApp precisa fazer pra acabar com as fake news"
+title: "1 mudança no WhatsApp que diminuiria muito as fake news"
 date: 2026-05-23
 type: security
 tags: [segurança, forense, whatsapp, inteligência artificial, fake news, metadados]
