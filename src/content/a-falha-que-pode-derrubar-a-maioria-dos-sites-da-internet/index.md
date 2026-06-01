@@ -58,7 +58,7 @@ O buffer foi alocado para `N` bytes. A cópia escreve até `3N` bytes. Overflow 
 |---|---|---|
 | alloc | 0 | tamanho = raw length do capture |
 | copy  | 1 | `+` → `%2B`, escreve até 3x o esperado |
-| resultado | — | overflow no pool do worker nginx |
+| resultado | n/a | overflow no pool do worker nginx |
 
 Com named capture, o cálculo usa o mesmo contexto de escaping na alocação e na cópia. A divergência não existe.
 
@@ -88,7 +88,7 @@ nginx reinicia o worker automaticamente. O master continua rodando. Com o timing
 
 Rodei `benchmark.py` com 30 rounds contra cada rota, monitorando o worker via `/proc/<pid>/smaps` a cada 20ms.
 
-**Rota vulnerável — padrão repetido em cada round:**
+**Rota vulnerável, padrão repetido em cada round:**
 
 ```
 t=0.000s  heap=672 KB   (baseline)
@@ -140,7 +140,7 @@ Se você tiver isso, é candidato.
 
 **Opção 1: atualize para nginx 1.31 ou superior.** O bug foi corrigido upstream nessa versão.
 
-**Opção 2: troque grupos posicionais por named captures** — funciona em todas as versões:
+**Opção 2: troque grupos posicionais por named captures.** Funciona em todas as versões:
 
 ```nginx
 # Antes
@@ -156,7 +156,7 @@ location ~ ^/api/(?<endpoint>.*)$ {
 
 Named captures fazem o nginx usar cálculo de tamanho escape-aware. O buffer é alocado já considerando a expansão potencial de caracteres. Sem divergência, sem overflow. Funciona em todas as versões.
 
-Se você precisar preservar o endpoint para logging, `$endpoint` já está disponível como variável automaticamente pelo named capture — sem precisar de `set`.
+Se você precisar preservar o endpoint para logging, `$endpoint` já está disponível como variável automaticamente pelo named capture, sem precisar de `set`.
 
 ---
 
