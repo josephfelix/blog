@@ -100,11 +100,17 @@ Só em código.
 
 ## Resultado
 
-Publiquei este artigo e testei. O Google AI Mode não encontrou conteúdo específico sobre variáveis porque a parte do poema que fala sobre variáveis está dentro do bloco `data-nosnippet`.
+Publiquei o artigo e fiz dois testes.
 
-![Google AI Mode sem conteúdo específico sobre variáveis, prompt 1](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/conteudoia1.png)
+No primeiro, perguntei ao Google AI Mode sobre o tema da página. Ele reconheceu do que o artigo trata, mas não conseguiu recuperar o poema que está dentro do bloco `data-nosnippet`.
 
-![Google AI Mode sem conteúdo específico sobre variáveis, prompt 2](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/conteudoia2.png)
+![Google AI Mode reconhece o tema mas não encontra o poema](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/conteudoia1.png)
+
+No segundo, pedi diretamente que ele buscasse o poema no link do artigo. A resposta foi que o link não contém nenhum poema.
+
+![Google AI Mode afirma que o link não contém nenhum poema](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/conteudoia2.png)
+
+Você pode ver a conversa completa com o Google AI Mode [neste link](https://share.google/aimode/czOW6qbge8QHqiFzh).
 
 ---
 
