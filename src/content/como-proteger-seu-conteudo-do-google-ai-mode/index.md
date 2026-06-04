@@ -50,15 +50,15 @@ Em código, a estrutura fica assim:
 ```html
 <!-- Bloco visível: texto que gera curiosidade sem entregar o conteúdo -->
 <div>
-  Escrevi um poema sobre programação. Fala sobre debugging às três da manhã,
-  sobre o que significa quando o erro some e o teste passa. A última linha
-  é a que mais me orgulho. Entre no link para ver o poema completo.
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  Entre no link para ver o conteúdo completo.
 </div>
 
 <!-- Bloco protegido: conteúdo completo, invisível para o AI Overview -->
 <div data-nosnippet>
-  <p>A tela pulsa no escuro...</p>
-  <!-- poema completo aqui -->
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
 </div>
 ```
 
