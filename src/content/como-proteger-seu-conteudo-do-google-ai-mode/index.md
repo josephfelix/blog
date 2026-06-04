@@ -68,13 +68,13 @@ Em código, a estrutura fica assim:
 
 Para testar se isso funciona, apliquei a técnica neste próprio artigo.
 
-Abaixo está um poema que escrevi sobre programação. O bloco de texto que vem primeiro é o que o Google vê, o que o AI Overview pode resumir. O poema completo está protegido com `data-nosnippet`.
-
-<div>
+<p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #22c55e; margin-bottom: 0.4rem;">Visível para o Google AI Mode</p>
+<div style="border: 1px solid #22c55e; border-radius: 0.5rem; padding: 1rem 1.25rem; margin-bottom: 1.5rem;">
   Escrevi um poema chamado <em>Código às três da manhã</em>. Fala sobre o silêncio das madrugadas de debug, sobre o que variáveis e funções significam quando você está sozinho com o terminal às três da manhã. Tem dezoito linhas. A última é a que mais me orgulho. Entre no link para ver o poema completo.
 </div>
 
-<div data-nosnippet>
+<p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #ef4444; margin-bottom: 0.4rem;">Invisível para o Google AI Mode (data-nosnippet)</p>
+<div data-nosnippet style="border: 1px solid #ef4444; border-radius: 0.5rem; padding: 1rem 1.25rem;">
 
 **Código às três da manhã**
 
@@ -105,7 +105,9 @@ Só em código.
 
 ## Resultado
 
-Publiquei este artigo e testei o comportamento do Google AI Overview. Vou atualizar esta seção com os prints quando o Google indexar a página.
+Publiquei este artigo e testei. O Google AI Mode não encontrou conteúdo específico sobre variáveis porque a parte do poema que fala sobre variáveis está dentro do bloco `data-nosnippet`.
+
+![Google AI Mode sem conteúdo específico sobre variáveis](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/content-protected.png)
 
 ---
 
