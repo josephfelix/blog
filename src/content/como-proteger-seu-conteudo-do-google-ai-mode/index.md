@@ -102,7 +102,9 @@ Só em código.
 
 Publiquei este artigo e testei. O Google AI Mode não encontrou conteúdo específico sobre variáveis porque a parte do poema que fala sobre variáveis está dentro do bloco `data-nosnippet`.
 
-![Google AI Mode sem conteúdo específico sobre variáveis](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/content-protected.png)
+![Google AI Mode sem conteúdo específico sobre variáveis, prompt 1](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/conteudoia1.png)
+
+![Google AI Mode sem conteúdo específico sobre variáveis, prompt 2](/blog/_content/como-proteger-seu-conteudo-do-google-ai-mode/conteudoia2.png)
 
 ---
 
