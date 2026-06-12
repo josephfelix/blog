@@ -22,7 +22,7 @@ Montei um experimento com cinco projetos Node.js. Todos implementam a mesma cois
 | project-a | Monolítico, tudo em um único arquivo, sem separação de responsabilidades |
 | project-b | MVC, separação em Models, Controllers e Routes |
 | project-c | Strategy + Repository, estratégias de validação plugáveis e repositório para abstração de dados |
-| project-d | Clean Architecture (Hexagonal), camadas de domínio, aplicação e infraestrutura com inversão de dependência |
+| project-d | Clean Architecture, camadas de domínio, aplicação e infraestrutura com inversão de dependência |
 | project-e | Observer/Event-Driven, event bus desacopla rotas da lógica de negócio via eventos |
 
 Para cada projeto, mandei exatamente o mesmo prompt, sem nenhuma variação:
@@ -162,7 +162,7 @@ O modelo escolhido foi o `qwen/qwen3.6-plus`, robusto, com janela de contexto de
   <a href="/blog/_content/qual-design-pattern-gasta-mais-tokens/project-d.png" target="_blank">
     <img src="/blog/_content/qual-design-pattern-gasta-mais-tokens/project-d.png" alt="Resultado /usage no project-d" style="max-width: 65%; display: block; margin: 0 auto;" />
   </a>
-  <figcaption>Projeto D - Clean Architecture (Hexagonal), camadas de domínio, aplicação e infraestrutura com inversão de dependência</figcaption>
+  <figcaption>Projeto D - Clean Architecture, camadas de domínio, aplicação e infraestrutura com inversão de dependência</figcaption>
 </figure>
 
 ---
