@@ -145,14 +145,6 @@ As credenciais chegam em tempo real, exatamente quando o `postinstall` executa.
 
 ---
 
-## Por que o output some
-
-A partir do npm 7, todo stdout e stderr de lifecycle scripts é suprimido por padrão no terminal. Isso pode dar a impressão de que o código seria visível ou detectado, mas não é. O script executa normalmente, simplesmente não imprime nada na tela da vítima.
-
-Gravar em arquivo, fazer uma requisição HTTP, exfiltrar via DNS, qualquer operação de I/O funciona sem nenhuma flag especial. O silêncio é uma feature do npm, não uma barreira.
-
----
-
 ## INIT_CWD: como o script sabe onde você está
 
 `process.cwd()` retorna o diretório do próprio pacote instalado, não do projeto que o instalou. Mas o npm injeta automaticamente a variável `INIT_CWD` em todos os lifecycle scripts. Ela contém o diretório onde o `npm install` foi executado, ou seja, a raiz do projeto da vítima.
