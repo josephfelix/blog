@@ -1,17 +1,17 @@
 ---
-title: "Qual design pattern gasta mais tokens?"
+title: "Como a organização do código influencia o consumo de tokens?"
 date: 2026-06-07
 type: article
-tags: [ia, llm, tokens, design patterns, node.js, benchmark, openrouter, claude code]
-description: "Montei 5 projetos Node.js com design patterns diferentes e mandei o mesmo prompt em cada um. O objetivo era medir qual arquitetura consome mais tokens numa tarefa real."
+tags: [ia, llm, tokens, design patterns, arquitetura, node.js, benchmark, openrouter, claude code]
+description: "Montei 5 projetos Node.js com diferentes formas de organização do código e mandei o mesmo prompt em cada um. O objetivo era medir como a estrutura do projeto influencia o consumo de tokens numa tarefa real."
 cover: /blog/_content/qual-design-pattern-gasta-mais-tokens/cover.png
-coverAlt: "Balança com design patterns de um lado e tokens do outro, representando o custo de cada arquitetura"
+coverAlt: "Balança com diferentes formas de organização de código de um lado e tokens do outro, representando o custo de cada estrutura"
 draft: false
 ---
 
 Comecei a me perguntar se a arquitetura do código influencia o consumo de tokens de um LLM. A hipótese parece óbvia à primeira vista: um projeto com mais arquivos, mais abstrações e mais indireção provavelmente exige que o modelo leia mais contexto para entender onde fazer uma mudança. Mas eu queria medir isso de verdade.
 
-Montei um experimento com cinco projetos Node.js. Todos implementam a mesma coisa: um cadastro de usuários. A diferença está no design pattern de cada um.
+Montei um experimento com cinco projetos Node.js. Todos implementam a mesma coisa: um cadastro de usuários. A diferença está na forma de organizar o código em cada um.
 
 ---
 
@@ -61,7 +61,7 @@ Curiosamente, o projeto A, que não tem nenhum design pattern, acabou sendo o ma
   <figcaption>Média de tokens gastos por projeto nos três modelos locais</figcaption>
 </figure>
 
-O gráfico acima agrega a média dos três modelos. Mas olhando os dados separados por modelo, aparece um detalhe que muda a leitura do experimento inteiro: o modelo importa tanto quanto o design pattern.
+O gráfico acima agrega a média dos três modelos. Mas olhando os dados separados por modelo, aparece um detalhe que muda a leitura do experimento inteiro: o modelo importa tanto quanto a organização do projeto.
 
 <figure style="text-align: center;">
   <a href="/blog/_content/qual-design-pattern-gasta-mais-tokens/tokens_por_projetos_modelos.png" target="_blank">
@@ -70,7 +70,7 @@ O gráfico acima agrega a média dos três modelos. Mas olhando os dados separad
   <figcaption>Consumo de tokens por projeto, separado por modelo</figcaption>
 </figure>
 
-O `llama3.2:3b` consome significativamente mais tokens para processar a mesma tarefa nos mesmos projetos que o `qwen3:4b` e o `gemma3:4b`. Isso significa que parte do que parece ser "custo do design pattern" é, na prática, custo do modelo. Um projeto com Clean Architecture processado pelo llama pode gastar mais tokens do que o mesmo projeto monolítico processado pelo qwen3, não porque a arquitetura exige mais, mas porque o modelo é menos eficiente em navegar o código.
+O `llama3.2:3b` consome significativamente mais tokens para processar a mesma tarefa nos mesmos projetos que o `qwen3:4b` e o `gemma3:4b`. Isso significa que parte do que parece ser "custo da organização do código" é, na prática, custo do modelo. Um projeto com Clean Architecture processado pelo llama pode gastar mais tokens do que o mesmo projeto monolítico processado pelo qwen3, não porque a arquitetura exige mais, mas porque o modelo é menos eficiente em navegar o código.
 
 Isso não invalida a comparação entre projetos, mas é um fator que precisa estar na conta. Antes de concluir que determinado padrão é caro, vale saber qual modelo está fazendo a leitura.
 
@@ -190,12 +190,12 @@ O benchmark está disponível no GitHub para quem quiser rodar na própria máqu
 
 ## Conclusão
 
-O experimento mostrou que a resposta para "qual design pattern gasta mais tokens?" depende de qual modelo está executando a tarefa.
+O experimento mostrou que a resposta para "qual forma de organizar o código gasta mais tokens" depende de qual modelo está executando a tarefa.
 
 Modelos menores, como os testados na primeira rodada com Ollama, gastam mais tokens em projetos simples. O projeto A, sem nenhum padrão, foi o que mais consumiu nessa rodada: sem estrutura orientando onde mexer, o modelo precisou gerar mais output para resolver a ambiguidade antes de escrever qualquer linha.
 
 Com modelos mais robustos e bem treinados, a lógica se inverte. Esses modelos resolvem a ambiguidade do código simples com muito menos esforço, e o projeto A passou a ser um dos mais baratos. Na segunda rodada, os que mais consumiram foram o Observer/Event-Driven e o MVC, não necessariamente os padrões mais complexos na hierarquia de abstração. O experimento não permite concluir o porquê com precisão, mas fica claro que o custo por projeto muda conforme o modelo usado.
 
-Na terceira rodada, usando o Claude Code como ferramenta de agente, o Observer/Event-Driven foi o que consumiu menos tokens entre todos os design patterns medidos. Vale notar que na segunda rodada esse mesmo padrão apareceu entre os maiores consumidores, o que reforça a tese central: o resultado muda conforme a ferramenta e o modelo. Com um agente navegando o código de forma interativa, lendo arquivo por arquivo e tomando decisões sobre o que ler a seguir, o desacoplamento via event bus produziu um código mais direto de navegar, cada parte do sistema com uma responsabilidade clara e as conexões entre elas explícitas nos eventos.
+Na terceira rodada, usando o Claude Code como ferramenta de agente, o Observer/Event-Driven foi o que consumiu menos tokens entre todas as abordagens medidas. Vale notar que na segunda rodada esse mesmo padrão apareceu entre os maiores consumidores, o que reforça a tese central: o resultado muda conforme a ferramenta e o modelo. Com um agente navegando o código de forma interativa, lendo arquivo por arquivo e tomando decisões sobre o que ler a seguir, o desacoplamento via event bus produziu um código mais direto de navegar, cada parte do sistema com uma responsabilidade clara e as conexões entre elas explícitas nos eventos.
 
-O que o experimento prova, no fim, é que otimizar consumo de tokens não é só uma questão de escolher um design pattern mais simples. É uma combinação do padrão com o modelo que vai executar a tarefa. Um código sem estrutura pode custar mais caro do que um projeto com arquitetura bem definida, dependendo de quem está lendo.
+O que o experimento prova, no fim, é que otimizar consumo de tokens não é só uma questão de escolher uma organização de código mais simples. É uma combinação do padrão com o modelo que vai executar a tarefa. Um código sem estrutura pode custar mais caro do que um projeto com arquitetura bem definida, dependendo de quem está lendo.
